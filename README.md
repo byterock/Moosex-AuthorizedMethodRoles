@@ -1,2 +1,0 @@
-Moosex-AuthorizedMethodRoles
-============================
