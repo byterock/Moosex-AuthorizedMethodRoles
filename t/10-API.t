@@ -94,6 +94,7 @@ eval {
    $test2->ping();
 };
 
+
 ok(scalar($@),"test_one_of_fail");
 
 my $test3 = test_required_pass->new();

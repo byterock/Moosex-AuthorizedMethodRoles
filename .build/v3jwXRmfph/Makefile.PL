@@ -32,10 +32,7 @@ my %WriteMakefileArgs = (
   "TEST_REQUIRES" => {
     "Moose::Util" => 0,
     "Test::Moose::More" => 0,
-    "Test::More" => 0,
-    "test_role1" => 0,
-    "test_role2" => 0,
-    "test_role3" => 0
+    "Test::More" => 0
   },
   "VERSION" => "0.001",
   "test" => {
@@ -55,9 +52,6 @@ my %FallbackPrereqs = (
   "Test::Moose::More" => 0,
   "Test::More" => 0,
   "strict" => 0,
-  "test_role1" => 0,
-  "test_role2" => 0,
-  "test_role3" => 0,
   "warnings" => 0
 );
 

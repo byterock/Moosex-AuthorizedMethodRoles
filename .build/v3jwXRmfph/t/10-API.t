@@ -94,6 +94,7 @@ eval {
    $test2->ping();
 };
 
+warn($@);
 ok(scalar($@),"test_one_of_fail");
 
 my $test3 = test_required_pass->new();
@@ -108,7 +109,7 @@ eval {
 
  
 ok(scalar($@),"test_required_fail");
-
+warn($@);
 my $test5 = test_required_pass_2->new();
 
 ok($test5->ping(),"test_required_pass_2");

@@ -19,7 +19,7 @@ around wrap => sub {
     $meth_obj = $method->$wrap
       (
        sub {
-           $meth_obj->authorized_do($meth_obj, $code, @_)
+           $meth_obj->authorized_do($meth_obj, $code,$method, @_)
        },
        %options
       );
@@ -32,13 +32,14 @@ sub authorized_do {
     my $method = shift;
     my $requires = $method->requires;
     my $code = shift;
- 
+    my $method_name = shift;
+    my $requires = $method->req
     my ($instance) = @_;
     foreach my $key (keys($requires)){
       my $author_sub = '_authorize_'.$key;
       next
         unless ($self->can($author_sub));
-      $self->$author_sub($requires->{$key},$instance,$method);
+      $self->$author_sub($requires->{$key},$instance,$method_name);
       
       
     }
@@ -48,17 +49,17 @@ sub authorized_do {
 
 sub _authorize_required {
   my $self    = shift;
-  my ($roles,$instance,$method) = @_;
+  my ($roles,$instance,$method_name) = @_;
   
   foreach my $role (@{$roles}){
-    die ref($instance). " must express the Role $role to use $method!!" 
+    die ref($instance). " must express the Role $role to use $method_name!!" 
       if !Moose::Util::does_role($instance,$role);
  }
 }
 
 sub _authorize_one_of {
   my $self    = shift;
-  my ($roles,$instance,$method) = @_;
+  my ($roles,$instance,$method_name) = @_;
   my $message =  ref($instance). " must express on of these Roles: ";
   my $comma = "";
   foreach my $role (@{$roles}){
@@ -67,7 +68,7 @@ sub _authorize_one_of {
     $message.=$comma.$role;
     $comma=',';
   }
-  $message.=" to use $method";
+  $message.=" to use $method_name";
   die $message;
 
 }
