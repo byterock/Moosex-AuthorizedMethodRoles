@@ -6,8 +6,6 @@ Moose::Exporter->setup_import_methods(also => 'Moose::Role');
 
 sub init_meta {
     my ($class, %opts) = @_;
-use Data::Dumper;
-#warn("init meta".Dumper(\%opts));
     Moose::Role->init_meta(%opts);
 
     Moose::Util::MetaRole::apply_metaroles

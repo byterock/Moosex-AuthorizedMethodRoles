@@ -1,28 +1,15 @@
 package MooseX::Meta::Method::Role::Authorized;
 use  MooseX::Meta::Method::Role::Authorized::Meta::Role;
-# use Moose::Util::TypeConstraints;
-# use aliased 'MooseX::Meta::Method::Role::Authorized::HasRoles';
 
 has requires =>
   ( is => 'ro',
     isa => 'HashRef',
     default => sub { [] } );
 
-# my $default_verifier = HasRoles->new();
-
-# has verifier =>
-  # ( is => 'ro',
-    # isa => duck_type(['authorized_do']),
-    # default => sub { $default_verifier } );
 around wrap => sub {
     my ($wrap, $method, $code, %options) = @_;
  
     my $requires = $options{requires};
-     use Data::Dumper;
- #    warn("wrap=".Dumper($requires));
-    # warn("x=".((exists($requires->{requires}) and ref($requires->{requires}) eq 'ARRAY')));
-    # warn("x=".(((exists($requires->{requires}) and ref($requires->{requires}) eq 'ARRAY')) or
-              # ((exists($requires->{one_of}) and ref($requires->{one_of}) eq 'ARRAY'))));
     
     die "requires hash-ref must have either a 'required' or 'one_of' or both key that points to an array-ref of Roles!"
       unless (((exists($requires->{required}) and ref($requires->{required}) eq 'ARRAY')) or
@@ -47,45 +34,41 @@ sub authorized_do {
     my $code = shift;
  
     my ($instance) = @_;
-    use Data::Dumper;
-    
-#    warn(Dumper($requires));
     foreach my $key (keys($requires)){
       my $author_sub = '_authorize_'.$key;
       next
         unless ($self->can($author_sub));
-      $self->$author_sub($requires->{$key},$instance);
+      $self->$author_sub($requires->{$key},$instance,$method);
       
       
     }
      $code->(@_);
-       # warn("here someplce roles=".Dumper($roles ));
-    #die "You Die Now GI!!" if !Moose::Util::does_role($instance,$roles->[0]);
-    
-    #just to see if this works
+
 }
 
 sub _authorize_required {
   my $self    = shift;
-  my ($roles,$instance) = @_;
+  my ($roles,$instance,$method) = @_;
   
   foreach my $role (@{$roles}){
-      die "You Die Now GI!!" 
+    die ref($instance). " must express the Role $role to use $method!!" 
       if !Moose::Util::does_role($instance,$role);
  }
 }
 
 sub _authorize_one_of {
   my $self    = shift;
-  my ($roles,$instance) = @_;
-  
+  my ($roles,$instance,$method) = @_;
+  my $message =  ref($instance). " must express on of these Roles: ";
+  my $comma = "";
   foreach my $role (@{$roles}){
     return 1
       if (Moose::Util::does_role($instance,$role));
-
+    $message.=$comma.$role;
+    $comma=',';
   }
-
-  die "You Die Now GI!!";
+  $message.=" to use $method";
+  die $message;
 
 }
 1;
@@ -94,11 +77,11 @@ __END__
 
 =head1 NAME
 
-MooseX::Meta::Method::Authorized - Authorization in method calls
+MooseX::Meta::Method::Role::Authorized
 
 =head1 DESCRIPTION
 
-This trait provides support for verifying authorization before calling
+This trait provides support for verifying roles before calling
 a method.
 
 =head1 ATTRIBUTES
@@ -107,30 +90,18 @@ a method.
 
 =item requires
 
-This attribute is an array reference with the values that are going to
-be used by the verifier when checking this invocation.
+This attribute is an hash reference with the values that are going to
+be used by the authorized_do method when checking this invocation.
 
-=item verifier
+=head1 METHODS
 
-This is the object/class on which the "authorized_do" method is going
-to be invoked. This is the object responsible for doing the actual
-verification. It is invoked as:
+=item authorized_do
 
-  $verifier->authorized_do($meth_obj, $code, @_)
-
-It is expected that this method should die if the authorization is not
-stablished.
-
-The default value for this attribute is
-L<MooseX::Meta::Method::Authorized::CheckRoles>, which will get the
-current user by calling the "user" method and list the roles given to
-that user by invoking the "roles" method.
-
-=back
+Call the Api keys in trun.  If you want to expand on this API simply add in 
+you _sub and validation  like the others
 
 =head1 METHOD
 
-=over
 
 =item wrap
 
@@ -141,13 +112,12 @@ after the authorization being checked.
 
 =head1 SEE ALSO
 
-L<MooseX::AuthorizedMethods>, L<Class::MOP::Method>
+L<http://search.cpan.org/dist/MooseX-AuthorizedMethodRoles/>, L<Class::MOP::Method>
 
-=head1 AUTHORS
+=head1 AUTHOR
 
-Daniel Ruoso E<lt>daniel@ruoso.comE<gt>
+John Scoles, C<< <byterock at hotmail.com> >>
 
-With help from rafl and doy from #moose.
 
 =head1 COPYRIGHT AND LICENSE
 
