@@ -132,7 +132,7 @@ The package Standing::Order can invoke 'shipping_authorized' but it cannot invok
 
 =head1 SEE ALSO
 
- L<https://metacpan.org/pod/MooseX::Meta::Method::Authorized> for the insparation for this MooseX
+ L<https://metacpan.org/pod/MooseX::Meta::Method::Authorized/> for the insparation for this MooseX
 
 =head1 AUTHOR
 
@@ -150,9 +150,9 @@ You can also look for information at:
 
 =over 4
 
-=item * AnnoCPAN: Annotated CPAN documentation L<http://annocpan.org/dist/MooseX-AuthorizedMethodRoles>
+=item * AnnoCPAN: Annotated CPAN documentation L<http://annocpan.org/dist/MooseX-AuthorizedMethodRoles/>
 
-=item * CPAN Ratings L<http://cpanratings.perl.org/d/MooseX-AuthorizedMethodRoles>
+=item * CPAN Ratings L<http://cpanratings.perl.org/d/MooseX-AuthorizedMethodRoles/>
 
 =item * Search CPAN L<http://search.cpan.org/dist/MooseX-AuthorizedMethodRoles/>
 
@@ -160,14 +160,14 @@ You can also look for information at:
 
 =head1 ACKNOWLEDGEMENTS
 
-Daniel Ruoso (l<https://metacpan.org/author/DRUOSO>)
+Daniel Ruoso (l<https://metacpan.org/author/DRUOSO/>)
 
-- For 'L<https://metacpan.org/pod/MooseX::Meta::Method::Authorized>' which I used completly wrong to start then had to 
+- For 'L<https://metacpan.org/pod/MooseX::Meta::Method::Authorized/>' which I used completly wrong to start then had to 
 scramble to create this one to cover my tracks
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010 by John Scoles
+Copyright 2014 by John Scoles
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
