@@ -165,6 +165,10 @@ Daniel Ruoso (l<https://metacpan.org/author/DRUOSO/>)
 - For 'L<https://metacpan.org/pod/MooseX::Meta::Method::Authorized/>' which I used completly wrong to start then had to 
 scramble to create this one to cover my tracks
 
+=head1 Ssource
+
+<a href="https://github.com/byterock/Moosex-AuthorizedMethodRoles">
+
 =head1 LICENSE AND COPYRIGHT
 
 Copyright 2014 by John Scoles
