@@ -1,42 +1,3 @@
-package MooseX::AuthorizedMethodRoles;
-use Moose ();
-use Moose::Exporter;
-use Sub::Name;
-
-our $VERSION = 0.01;
-
-Moose::Exporter->setup_import_methods
-  ( with_meta => [ 'authorized_roles' ],
-    also      => [ 'Moose' ],
-  );
-
-
-my $method_metaclass = Moose::Meta::Class->create_anon_class
-  (
-   superclasses => ['Moose::Meta::Method'],
-   roles => [ 'MooseX::Meta::Method::Role::Authorized' ],
-   cache => 1,
-  );
-
-sub authorized_roles {
-    my ($meta, $name, $requires, $code) = @_;
-    #warn($meta->name.",".$name);
-    my $m = $method_metaclass->name->wrap
-      (
-       subname(join('::',$meta->name,$name),$code),
-       package_name => $meta->name,
-       name => $name,
-       requires => $requires
-      );
-
-    $meta->add_method($name, $m);
-}
-
-1;
-
-
-__END__
-
 =head1 NAME
 
 MooseX::AuthorizedMethodRole - Syntax sugar for authorized methods by MooseX::Role
@@ -129,10 +90,20 @@ is allowed.  It this type of configuation both the 'one_of' and 'required' must 
 The package Standing::Order can invoke 'shipping_authorized' but it cannot invoke 'bill_after_30_days'
   
   
+=head1 INSTALLATION
+
+Nothing special just use CPAN or if you want just follow the below.
+
+Dowload and unzip the tar file and then to install this module, run the following commands:
+
+perl Makefile.PL
+make
+make test
+make install
 
 =head1 SEE ALSO
 
- L<https://metacpan.org/pod/MooseX::Meta::Method::Authorized> for the insparation for this MooseX
+ L<https://metacpan.org/pod/MooseX::Meta::Method::Authorized/> for the insparation for this MooseX
 
 =head1 AUTHOR
 
@@ -150,9 +121,9 @@ You can also look for information at:
 
 =over 4
 
-=item * AnnoCPAN: Annotated CPAN documentation L<http://annocpan.org/dist/MooseX-AuthorizedMethodRoles>
+=item * AnnoCPAN: Annotated CPAN documentation L<http://annocpan.org/dist/MooseX-AuthorizedMethodRoles/>
 
-=item * CPAN Ratings L<http://cpanratings.perl.org/d/MooseX-AuthorizedMethodRoles>
+=item * CPAN Ratings L<http://cpanratings.perl.org/d/MooseX-AuthorizedMethodRoles/>
 
 =item * Search CPAN L<http://search.cpan.org/dist/MooseX-AuthorizedMethodRoles/>
 
@@ -160,20 +131,20 @@ You can also look for information at:
 
 =head1 ACKNOWLEDGEMENTS
 
-Daniel Ruoso (l<https://metacpan.org/author/DRUOSO>)
+Daniel Ruoso (l<https://metacpan.org/author/DRUOSO/>)
 
-- For 'L<https://metacpan.org/pod/MooseX::Meta::Method::Authorized>' which I used completly wrong to start then had to 
+- For 'L<https://metacpan.org/pod/MooseX::Meta::Method::Authorized/>' which I used completly wrong to start then had to 
 scramble to create this one to cover my tracks
+
+=head1 Ssource
+
+<a href="https://github.com/byterock/Moosex-AuthorizedMethodRoles">
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010 by John Scoles
+Copyright 2014 by John Scoles
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
 =cut
-
-
-
-

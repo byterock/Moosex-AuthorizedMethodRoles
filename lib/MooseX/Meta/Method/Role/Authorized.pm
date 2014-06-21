@@ -1,4 +1,6 @@
 package MooseX::Meta::Method::Role::Authorized;
+use warnings;
+use strict;
 use  MooseX::Meta::Method::Role::Authorized::Meta::Role;
 
 has requires =>
@@ -97,10 +99,15 @@ be used by the authorized_do method when checking this invocation.
 
 =head1 METHODS
 
+=over
+
 =item authorized_do
+
 
 Call the Api keys in trun.  If you want to expand on this API simply add in 
 you _sub and validation  like the others
+
+=back
 
 =head1 METHOD
 

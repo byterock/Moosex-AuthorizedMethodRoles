@@ -3,7 +3,7 @@ use Moose ();
 use Moose::Exporter;
 use Sub::Name;
 
-our $VERSION = 0.01;
+our $VERSION = 0.00.01;
 
 Moose::Exporter->setup_import_methods
   ( with_meta => [ 'authorized_roles' ],
@@ -129,6 +129,16 @@ is allowed.  It this type of configuation both the 'one_of' and 'required' must 
 The package Standing::Order can invoke 'shipping_authorized' but it cannot invoke 'bill_after_30_days'
   
   
+=head1 INSTALLATION
+
+Nothing special just use CPAN or if you want just follow the below.
+
+Dowload and unzip the tar file and then to install this module, run the following commands:
+
+perl Makefile.PL
+make
+make test
+make install
 
 =head1 SEE ALSO
 
