@@ -93,6 +93,8 @@ a method.
 This attribute is an hash reference with the values that are going to
 be used by the authorized_do method when checking this invocation.
 
+=back
+
 =head1 METHODS
 
 =item authorized_do
@@ -102,6 +104,7 @@ you _sub and validation  like the others
 
 =head1 METHOD
 
+=over
 
 =item wrap
 
