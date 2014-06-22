@@ -2,6 +2,7 @@ Revision history for Moosex-AuthorizedMethodRoles
 
 Changes in 0.001
     Initail version
+
 Changes in 0.00.02;
     Fixed up the pod JScoles
     Added in Readme.pod JScoles
@@ -9,3 +10,8 @@ Changes in 0.00.02;
     Added more tests JScoles
     Fixed the Version JScoles
     Added in use strict and use warn into MooseX::Meta::Method::Role::Authorized JScoles
+
+Changes in 0.00.03;
+    Fixed the Version (properly this time) JScoles
+    Added LICENSE file
+    

@@ -1,4 +1,5 @@
 package MooseX::Meta::Method::Role::Authorized::Application::ToClass;
+
 use Moose::Role;
 use Moose::Util::MetaRole;
 

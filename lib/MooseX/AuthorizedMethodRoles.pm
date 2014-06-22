@@ -1,9 +1,8 @@
 package MooseX::AuthorizedMethodRoles;
+
 use Moose ();
 use Moose::Exporter;
 use Sub::Name;
-
-our $VERSION = 0.00.01;
 
 Moose::Exporter->setup_import_methods
   ( with_meta => [ 'authorized_roles' ],

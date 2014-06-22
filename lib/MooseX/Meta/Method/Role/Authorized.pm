@@ -1,4 +1,5 @@
 package MooseX::Meta::Method::Role::Authorized;
+
 use warnings;
 use strict;
 use  MooseX::Meta::Method::Role::Authorized::Meta::Role;
