@@ -37,7 +37,7 @@ sub authorized_do {
     my $code = shift;
  
     my ($instance) = @_;
-    foreach my $key (keys($requires)){
+    foreach my $key (keys(%$requires)){
       my $author_sub = '_authorize_'.$key;
       next
         unless ($self->can($author_sub));

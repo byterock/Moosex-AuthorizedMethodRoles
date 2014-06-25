@@ -1,6 +1,5 @@
 #!/usr/bin/perl
 
-use 5.010;
 use strict;
 use warnings;
 
@@ -86,7 +85,7 @@ my $method_metaclass = Moose::Meta::Class->create_anon_class
      requires =>{ required =>['test_role2']}
     );
   __PACKAGE__->meta->add_method('ping_required_fail',$p);
-  
+  
 };
  
 my $object1 = test_all_pass_fail->new();
@@ -99,7 +98,7 @@ ok($object1->ping_one_of_pass('test1'),'ping_one_of_pass');
 };
 
 ok(scalar($@),"ping_one_of_fail pass");
-
+
 eval {
   $object1->ping_required_fail('test1');
 };
