@@ -18,3 +18,6 @@ Changes in 0.00.03;
 
 Changes in 0.00.04;
     Fixed a few more Kwalitie issues
+
+Changes in 0.00.05;
+    Reduce minimum Perl to 5.8.8  Toby Inkster 
